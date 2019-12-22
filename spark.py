@@ -80,4 +80,68 @@ airports = spark.read.csv(file_path, header = True)
 # Show the data
 airports.show()
 
-########################################3
+########################################
+#Creating columns
+
+# Create the DataFrame flights
+flights = spark.table("flights")
+
+# Show the head
+flights.show()
+
+# Add duration_hrs
+flights = flights.withColumn("duration_hrs", flights.air_time / 60)
+
+#################################
+##SQL WHERE   -   Spark .filter()
+
+# Filter flights by passing a string
+long_flights1 = flights.filter("distance > 1000")
+
+# Filter flights by passing a column of boolean values
+long_flights2 = flights.filter(flights.distance > 1000)
+
+# Print the data to check they're equal
+print(long_flights1.show())
+print(long_flights2.show())
+
+##########################################
+## SELECT -> .select()
+
+# Select the first set of columns
+selected1 = flights.select("tailnum","origin","dest")
+
+# Select the second set of columns
+temp = flights.select(flights.origin, flights.dest, flights.carrier)
+
+# Define first filter
+filterA = flights.origin == "SEA"
+
+# Define second filter
+filterB = flights.dest == "PDX"
+
+# Filter the data, first by filterA then by filterB
+selected2 = temp.filter(filterA).filter(filterB)
+
+##############################################
+
+
+
+
+#######################################################
+####################################################
+##Recommender systems
+
+# View TJ_ratings
+TJ_ratings.show()
+
+# Generate recommendations for users
+get_ALS_recs(["Jane","Taylor"]) 
+
+#########################################################
+
+##Ratings data types
+# Group the data by "Genre"
+markus_ratings.groupBy("Genre").sum().show()
+
+######################################
