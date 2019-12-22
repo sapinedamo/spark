@@ -145,3 +145,34 @@ get_ALS_recs(["Jane","Taylor"])
 markus_ratings.groupBy("Genre").sum().show()
 
 ######################################
+#latent features
+
+# Examine matrix P using the .show() method
+P.show()
+
+# Examine matrix Pi using the .show() method
+Pi.show()
+
+#########################
+#Matrix multiplication
+# Use the .head() method to view the contents of matrices a and b
+print("Matrix A: ")
+print (a.head())
+
+print("Matrix B: ")
+print (b.head())
+
+# Complete the matrix with the product of matrices a and b
+product = np.array([[10, 12], [15, 18]])
+
+# Run this validation to see how your estimate performs
+product == np.dot(a,b)
+
+# Print the dimensions of C
+print(C.shape)
+
+# Print the dimensions of D
+print(D.shape)
+
+# Can C and D be multiplied together?
+C_times_D = None
